@@ -22,15 +22,15 @@
                 <a href="/mahasiswa/delete/{{ $m->id }}">Hapus</a>
             </td>
         </tr>
+
+        <h1>Edit Mahasiswa</h1>
+            <form action="/mahasiswa/update/{{ $m->id }}" method="POST">
+                 @csrf
+                 Nama: <input type="text" name="nama" value="{{ $m->nama }}"><br>
+                 NIM: <input type="text" name="nim" value="{{ $m->nim }}"><br>
+                 Jurusan: <input type="text" name="jurusan" value="{{ $m->jurusan }}"><br><button type="submit">Update</button>
+            </form>
         @endforeach
     </table>
-
-    <h1>Edit Mahasiswa</h1>
-    <form action="/mahasiswa/update/{{ $m->id }}" method="POST">
-        @csrf
-        Nama: <input type="text" name="nama" value="{{ $m->nama }}"><br>
-        NIM: <input type="text" name="nim" value="{{ $m->nim }}"><br>
-        Jurusan: <input type="text" name="jurusan" value="{{ $m->jurusan }}"><br><button type="submit">Update</button>
-    </form>
 </body>
 </html>
