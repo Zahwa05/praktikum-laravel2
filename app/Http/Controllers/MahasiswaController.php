@@ -24,4 +24,11 @@ class MahasiswaController extends Controller
         Mahasiswa::destroy($id);
         return redirect('/mahasiswa');
     }
+
+    public function index()
+    {
+        $data = Mahasiswa::all();
+
+        return view('mahasiswa.index', compact('data'));
+    }
 }

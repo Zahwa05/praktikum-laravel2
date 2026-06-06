@@ -1,45 +1,41 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Daftar Mahasiswa</title>
-</head>
-<body>
-    <table border="1">
-        <tr>
-            <th>Nama</th>
-            <th>NIM</th>
-            <th>Jurusan</th>
-        </tr>
-        @foreach ($data as $mhs)
-        <tr>
-            <td>{{ $m->nama }}</td>
-            <td>{{ $m->nim }}</td>
-            <td>{{ $m->jurusan }}</td>
-            <td>
-                <a href="/mahasiswa/edit/{{ $m->id }}">Edit</a>
-                <a href="/mahasiswa/delete/{{ $m->id }}">Hapus</a>
-            </td>
-        </tr>
-        <h1>Tambah Mahasiswa</h1>
-        <form action="/mahasiswa/store" method="POST">
-            @csrf
-            Nama : <input type="text" name="nama"><br><br>Nim : <input type="text" name="nim"><br><br>
-            Jurusan : <input type="text" name="jurusan"><br><br>
-            <button type="submit">Simpan</button>
-        </form>
-        <form action="/mahasiswa/update/{{ $m->id }}" method="POST">
-            @csrf
-            Nama: <input type="text" name="nama" value="{{ $m->nama }}"><br>
-            NIM: <input type="text" name="nim" value="{{ $m->nim }}"><br>
-            Jurusan: <input type="text" name="jurusan" value="{{ $m->jurusan }}"><br><button type="submit">Update</button>
-        </form>
+@extends('layouts.app')
+@section('title', 'Data Mahasiswa')
+@section('content')
+<h1>Data Mahasiswa</h1>
+<form action="/mahasiswa/store" method="POST">
+    @csrf
+    <label>Nama</label>
+    <input type="text" name="nama">
+    <label>NIM</label>
+    <input type="text" name="nim">
+    <label>Jurusan</label>
+    <input type="text" name="jurusan">
+    <button type="submit">
+        Simpan
+    </button>
+</form>
+<table>
+    <tr>
+        <th>Nama</th>
+        <th>NIM</th>
+        <th>Jurusan</th>
+        <th>Aksi</th>
+    </tr>
+    @foreach ($data as $mhs)
+    <tr>
+        <td>{{ $mhs->nama }}</td>
+        <td>{{ $mhs->nim }}</td>
+        <td>{{ $mhs->jurusan }}</td>
         <td>
-            <a href="/mahasiswa/edit/{{ $m->id }}">Edit</a>
-            <a href="/mahasiswa/delete/{{ $m->id }}">Hapus</a>
+            <a href="/mahasiswa/edit/{{ $mhs->id }}" class="btn-edit">
+                Edit
+            </a>
+
+            <a href="/mahasiswa/delete/{{ $mhs->id }}" class="btn-hapus">
+                Hapus
+            </a>
         </td>
-        @endforeach
-    </table>
-</body>
-</html>
+    </tr>
+    @endforeach
+</table>
+@endsection
